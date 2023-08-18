@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2023 at 05:24 PM
+-- Generation Time: Aug 18, 2023 at 02:33 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -29,19 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `brand` (
   `brand` int(11) NOT NULL,
-  `Brand_name` varchar(100) NOT NULL,
-  `Brand_img` varchar(200) NOT NULL
+  `Brand_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `brand`
 --
 
-INSERT INTO `brand` (`brand`, `Brand_name`, `Brand_img`) VALUES
-(1, 'BMW', ''),
-(2, 'VOLVO', ''),
-(3, 'TOYOTA', ''),
-(7, 'bmw', 'steering.PNG');
+INSERT INTO `brand` (`brand`, `Brand_name`) VALUES
+(1, 'BMW'),
+(2, 'VOLVO'),
+(3, 'TOYOTA'),
+(7, 'bmw');
 
 -- --------------------------------------------------------
 
@@ -61,7 +60,21 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `product_id`, `user_id`, `quantity_cart`) VALUES
-(1, 11, 1, 4);
+(1, 11, 1, 4),
+(5, 11, 1, 3),
+(6, 11, 1, 3),
+(7, 11, 1, 3),
+(8, 11, 1, 1),
+(9, 11, 1, 1),
+(10, 11, 1, 3),
+(11, 11, 1, 3),
+(12, 11, 1, 1),
+(13, 11, 1, 1),
+(14, 11, 1, 1),
+(15, 11, 1, 1),
+(16, 11, 1, 8),
+(17, 11, 1, 8),
+(18, 11, 1, 8);
 
 -- --------------------------------------------------------
 
@@ -116,6 +129,13 @@ CREATE TABLE `order` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`id`, `product_id`, `user_id`, `address`, `sub_total`, `total`, `date`) VALUES
+(1, 12, 1, '', 0, 0, '2023-08-17 19:58:55');
+
 -- --------------------------------------------------------
 
 --
@@ -166,8 +186,43 @@ CREATE TABLE `review` (
   `id` int(11) NOT NULL,
   `review` varchar(255) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `review_date` varchar(20) NOT NULL,
+  `userName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`id`, `review`, `product_id`, `user_id`, `review_date`, `userName`) VALUES
+(1, 'vfcnclksdnclsknls', 11, 1, '0000-00-00', '0'),
+(3, 'rgfds', 11, 1, '0000-00-00', '0'),
+(4, 'revklnflekwn', 11, 1, '0000-00-00', '0'),
+(5, 'kljbhfg', 11, 1, '2023-08-17', '0'),
+(6, 'qqqqqqqqqqqqq', 11, 1, '2023-08-17', '0'),
+(7, 'qqqqqqqqqqqqq', 11, 1, '2023-08-17', '0'),
+(8, 'qqqqqqqqqqqqq', 11, 1, '2023-08-17', '0'),
+(9, 'hcgvjhbknlm', 11, 1, '2023-08-17', '0'),
+(10, 'hcgvjhbknlm', 11, 1, '2023-08-17', '0'),
+(11, 'rrrrrrrrrrrr', 11, 1, '2023-08-17', '0'),
+(12, 'rrrrrrrrrrrr', 11, 1, '2023-08-17', '0'),
+(13, 'rrrrrrrrrrrr', 11, 1, '2023-08-17', '0'),
+(14, 'kojihugyjhkjlk;', 11, 1, '2023-08-17', '0'),
+(15, 'kojihugyjhkjlk;', 11, 1, '2023-08-17', 'razan mustafa'),
+(16, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(17, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(18, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(19, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(20, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(21, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(22, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(23, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(24, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(25, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(26, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(27, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa'),
+(28, 'rrrrrrrrrrrrrrrrrrrrrrrrrr', 11, 1, '2023-08-17', 'razan mustafa');
 
 -- --------------------------------------------------------
 
@@ -186,6 +241,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `image`, `role`) VALUES
+(1, 'razan', 'mustafa', '', '', '', 0);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -200,8 +262,8 @@ ALTER TABLE `brand`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `product_id` (`product_id`,`user_id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD KEY `product_id` (`product_id`,`user_id`) USING BTREE,
+  ADD KEY `user_id` (`user_id`) USING BTREE;
 
 --
 -- Indexes for table `category`
@@ -234,7 +296,7 @@ ALTER TABLE `product`
 --
 ALTER TABLE `review`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `product_id` (`product_id`,`user_id`);
+  ADD KEY `product_id` (`product_id`,`user_id`) USING BTREE;
 
 --
 -- Indexes for table `user`
@@ -256,7 +318,7 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -274,7 +336,7 @@ ALTER TABLE `discount`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -286,13 +348,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

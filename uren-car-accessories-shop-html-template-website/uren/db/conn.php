@@ -108,6 +108,41 @@ class crud{
         return $result;
     }
 
+    // select custromer name
+    public function getCutomerName($id) {
+        $sql = "SELECT first_name, last_name FROM user WHERE id = $id";
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
+    // addcommet
+    public function addComment( $comment, $productId,$user_id,$date,$userName){
+        $sql = "
+        INSERT INTO review (review,product_id,user_id,review_date,userName) 
+        VALUES (?,?,?,?,?)";
+
+        $stmt = mysqli_prepare($this->db, $sql);
+        mysqli_stmt_bind_param($stmt, "sssss", $comment, $productId,$user_id,$date,$userName);
+        $result = mysqli_stmt_execute($stmt);
+        return $result;
+    }
+
+    // get comment
+    public function getComment($productId) {
+        $sql = "SELECT * FROM review WHERE product_id = $productId";
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
+    // if product is in order
+    public function productInOrder($userid,$productId) {
+        $sql = "SELECT * FROM `order` WHERE product_id = $productId AND user_id = $userid";
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
+
+
     // single ptoduct
     public function getSingleProduct($id){
         $sql = "SELECT * FROM product WHERE id=$id";
@@ -115,7 +150,13 @@ class crud{
         return $result;
     }
 
-   
+   // sget user name***************
+
+   public function getUserId($id){
+    $sql = "SELECT  FROM product WHERE id=$id";
+    $result = $this->db->query($sql);
+    return $result;
+}
 
     // public function deleteProduct($id){
     //     $sql = "DELETE FROM products WHERE id=$id";

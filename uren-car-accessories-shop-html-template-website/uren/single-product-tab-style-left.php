@@ -12,7 +12,11 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
 // print_r($singleproducts);
 // $catagoies = $crudObj->getAllCatagory();
 
-?><!doctype html>
+?>
+
+
+
+<!doctype html>
 <html class="no-js" lang="zxx">
 
 <head>
@@ -1102,7 +1106,7 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
         <!-- Uren's Breadcrumb Area End Here -->
 
         <!-- Begin Uren's Tab Style Left Area -->
-        <?php while($product = $singleproducts->fetch_assoc()) { ?>
+        <?php while($product = $singleproducts->fetch_assoc()){ ?>
         <div class="sp-area sp-tab-style_left">
             <div class="container-fluid">
                 <div class="sp-nav">
@@ -1208,8 +1212,9 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                                 </div>
                                 <div class="qty-btn_area">
                                     <ul>
-                                        <li><a class="qty-cart_btn" href="single-product-tab-style-left"><button type="submit" name="addToCart">Add To Cart</button></a></li>
+                                        <li><a class="qty-cart_btn" href="single-product-tab-style-left.php"><button type="submit" name="addToCart">Add To Cart</button></a></li>
                                         <li><a class="qty-wishlist_btn" href="wishlist.html" data-toggle="tooltip" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
+
                                         </li>
                                         
                                     </ul>
@@ -1218,21 +1223,12 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                                 <?php  if (isset($_POST['addToCart'])){
 
                                     $quantity= $_POST['quantity_value'];
-                                    echo $quantity;
+                                    // echo $quantity;
                                     $crudObj->addToCart($_GET['productId'], $_SESSION['userID'], $quantity);
 
-
-
-
                                 }?>
-                                <!-- <div class="uren-tag-line">
-                                    <h6>Tags:</h6>
-                                    <a href="javascript:void(0)">vehicle</a>,
-                                    <a href="javascript:void(0)">car</a>,
-                                    <a href="javascript:void(0)">bike</a>
-                                </div> -->
-                               
-                                
+                                <a  href="cart.php"><button style="background-color:gold ;padding:5px; margin-top:60px; font-size:15px;">Go To Cart</button></a></li>
+
                             </div>
                         </div>
                     </div>
@@ -1241,7 +1237,7 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
             </div>
         </div>
         <!-- Uren's Tab Style Left Area End Here -->
-
+                            
         <!-- Begin Uren's Single Product Tab Area -->
         <div class="sp-product-tab_area">
             <div class="container-fluid">
@@ -1262,11 +1258,11 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                                         <ul>
                                             <li>
                                                 <strong>Brief</strong>
-                                                <span><?php echo $product['product_brife'] ?></span>
+                                                <span><?php echo $product['product_brife'];?></span>
                                             </li>
                                             <li>
                                                 <strong>Description</strong>
-                                                <span><?php echo $product['product_des'] ?></span>
+                                                <span><?php echo $product['product_des'];?></span>
                                             </li>
                                             
 
@@ -1302,64 +1298,69 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                                 </div>
                                 <div id="reviews" class="tab-pane" role="tabpanel">
                                     <div class="tab-pane active" id="tab-review">
-                                        <form class="form-horizontal" id="form-review">
-                                            <div id="review">
+                                        <form class="form-horizontal" id="form-review" method="post">
+                                         <!-- *********************** -->
+                                        <div style="width: 100%; height: 300px; overflow: auto; margin-bottom:20px;}">
+                                        <?php 
+                                        $reviews=$crudObj->getComment($_GET['productId']);
+                                        while($review = $reviews->fetch_assoc()){ 
+                                        ?>
+                                        <div id="review">
                                                 <table class="table table-striped table-bordered">
                                                     <tbody>
                                                         <tr>
-                                                            <td style="width: 50%;"><strong>Customer</strong></td>
-                                                            <td class="text-right">15/09/20</td>
+                                                            <td style="width: 50%;"><strong><?php echo $review['userName'];?></strong></td>
+                                                            <td class="text-right"><?php echo $review['review_date'];?></td>
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2">
-                                                                <p>Good product! Thank you very much</p>
-                                                                <!-- <div class="rating-box">
-                                                                    <ul>
-                                                                        <li><i class="ion-android-star"></i></li>
-                                                                        <li><i class="ion-android-star"></i></li>
-                                                                        <li><i class="ion-android-star"></i></li>
-                                                                        <li><i class="ion-android-star"></i></li>
-                                                                        <li><i class="ion-android-star"></i></li>
-                                                                    </ul>
-                                                                </div> -->
+                                                                <p><?php echo $review['review'];?></p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            </div>
+                                        </div>
+                                        
+                                        <?php
+                                        }?>
+                                        </div>
+                                            <!-- ************************** -->
+                                            <?php 
+                                            $order = $crudObj->productInOrder($_SESSION['userID'],$_GET['productId']);
+                                            if ($order->num_rows > 0){ 
+                                            ?>
+
                                             <h2>Write a review</h2>
-                                            <div class="form-group required">
-                                                <div class="col-sm-12 p-0">
-                                                    <label>Your Email <span class="required">*</span></label>
-                                                    <input class="review-input" type="email" name="con_email" id="con_email" required>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="form-group required second-child">
                                                 <div class="col-sm-12 p-0">
                                                     <label class="control-label">Share your opinion</label>
                                                     <textarea class="review-textarea" name="con_message" id="con_message"></textarea>
                                                     
+                                                    <?php $resul= $crudObj->getCutomerName($_SESSION['userID']);
+                                                     if ($resul->num_rows > 0) {
+                                                        $row = $resul->fetch_assoc();
+                                                        $name = $row['first_name'] . ' ' . $row['last_name'];
+                                                    };
+                                                    ?>
+
+                                                    <input type="hidden" name="username1" value="<?php echo $name;?>">
+                                                    <input type="hidden" name="date" value="<?php echo date('Y-m-d'); ?>">
+                                                    <input type="hidden" name="ProductId" value="<?php echo $_GET['productId']; ?>">
+                                                    
                                                 </div>
                                             </div>
                                             <div class="form-group last-child required">
-                                                <div class="col-sm-12 p-0">
-                                                    <!-- <div class="your-opinion">
-                                                        <label>Your Rating</label>
-                                                        <span>
-                                                    <select class="star-rating">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                    </select>
-                                                </span>
-                                                    </div>-->
-                                                </div>
+                                            
                                                 <div class="uren-btn-ps_right">
-                                                    <button class="uren-btn-2">Continue</button>
+                                                    <button name="addReview" class="uren-btn-2">Comment</button>
                                                 </div>
                                             </div>
+
+                                            <?php
+                                            }
+                                            ?>
+                                            <!-- *************************************** -->
                                         </form>
                                     </div>
                                 </div>
@@ -1369,6 +1370,15 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                 </div>
             </div>
         </div>
+        <?php 
+        if (isset($_POST['addReview'])){
+        $crudObj->addComment($_POST['con_message'],$_POST['ProductId'] , $_SESSION['userID'],$_POST['date'],$_POST['username1']);
+        }
+        ?>
+
+
+
+
         <!-- Uren's Single Product Tab Area End Here -->
 
         
@@ -1434,7 +1444,8 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                                 </div>
                             </div>
                             <?php            
-                            }}
+                            }
+                            }
                             ?>
                             <!-- ****************************** -->             
                             
@@ -1462,43 +1473,8 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
 
 
 
-        <!-- Begin Uren's Brand Area -->
-        <div class="uren-brand_area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title_area">
-                            <span>Top Quality Partner</span>
-                            <h3>Brands</h3>
-                        </div>
-                        <div class="brand-slider uren-slick-slider img-hover-effect_area" data-slick-options='{
-                        "slidesToShow": 6
-                        }' data-slick-responsive='[
-                                                {"breakpoint":1200, "settings": {"slidesToShow": 5}},
-                                                {"breakpoint":992, "settings": {"slidesToShow": 3}},
-                                                {"breakpoint":767, "settings": {"slidesToShow": 3}},
-                                                {"breakpoint":577, "settings": {"slidesToShow": 2}},
-                                                {"breakpoint":321, "settings": {"slidesToShow": 1}}
-                                            ]'>
-                            <!-- *************************************** -->
-                            <div class="slide-item">
-                                <div class="inner-slide">
-                                    <div class="single-product">
-                                        <a href="javascript:void(0)">
-                                            <img src="../photo/assets/images/brand/1.jpg" alt="Uren's Brand Image">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ********************************* -->
-                            
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Uren's Brand Area End Here -->
+        
+       
 
         <!-- Begin Uren's Footer Area -->
         <div class="uren-footer_area">
@@ -1896,5 +1872,4 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
     <script src="assets/js/main.js"></script>
 
 </body>
-
 </html>

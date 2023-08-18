@@ -1249,8 +1249,8 @@ session_start();
                                                         <!-- <li><a class="uren-add_compare" href="compare.html" data-toggle="tooltip" data-placement="top" title="Compare This Product"><i
                                                             class="ion-android-options"></i></a>
                                                         </li> -->
-                                                        <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                                            class="ion-android-open"></i></a></li>
+                                                        <!-- <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i
+                                                            class="ion-android-open"></i></a></li> -->
                                                     </ul>
                                                 </div>
                                             </div>
