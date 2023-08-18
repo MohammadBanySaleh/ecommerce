@@ -1,7 +1,7 @@
 <?php
 session_start();
 $_SESSION['userID']=1;
-$_GET['productId']=11;
+$_GET['productId'];
 
 require_once "./db/conn.php";
 //global $CataId = $GET['CataId'];
