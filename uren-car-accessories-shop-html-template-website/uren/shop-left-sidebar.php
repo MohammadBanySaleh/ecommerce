@@ -1257,7 +1257,7 @@ session_start();
                                             <div class="product-content">
                                                 <div class="product-desc_info">
 
-                                                    <h6><a class="product-name" style="font-size:25px" href="single-product.html"><?php echo $product['product_name'] ?></a></h6>
+                                                    <h6><a class="product-name" style="font-size:25px" href=""><?php echo $product['product_name'] ?></a></h6>
                                                     <div class="price-box">
                                                     <span class="old-price" style="font-size:20px"><?php echo $product['product_price'] ?></span><br>
                                                         <span class="new-price new-price-2" style="font-size:25px"><?php echo $product['product_price'] *0.9 ?></span>

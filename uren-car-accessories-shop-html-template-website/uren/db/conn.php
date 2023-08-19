@@ -75,19 +75,6 @@ class crud{
     
 
 
-
-    // add to cart
-    // public function addToCart($product_id, $user_id, $quantity_cart){
-    //     $sql = "
-    //     INSERT INTO products (product_id , user_id , quantity_cart) 
-    //     VALUES (?,?,?)";
-
-    //     $stmt = mysqli_prepare($this->db, $sql);
-    //     mysqli_stmt_bind_param($stmt, "sss", $product_id, $user_id, $quantity_cart);
-    //     $result = mysqli_stmt_execute($stmt);
-    //     return $result;
-    // }
-
     // add to cart
     public function addToCart($product_id, $user_id, $quantity_cart){
         $sql = "
@@ -100,6 +87,19 @@ class crud{
         return $result;
     }
 
+    // get from cart
+    public function getCart($userId) {
+        $sql = "SELECT * FROM cart WHERE user_id = $userId";
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
+    // get from cart2
+    public function getCart2($userId, $productId) {
+        $sql = "SELECT * FROM cart WHERE user_id = $userId AND product_id = $productId";
+        $result = $this->db->query($sql);
+        return $result;
+    }
 
     /// get manufactory
     public function getMannfactory($id){
@@ -149,6 +149,13 @@ class crud{
         $result = $this->db->query($sql);
         return $result;
     }
+    //select all  in cartproduct related to user id
+    public function getProductInCart($id){
+        $sql = "SELECT * FROM cart WHERE user_id=$id";
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
 
    // sget user name***************
 
@@ -158,15 +165,10 @@ class crud{
     return $result;
 }
 
-    // public function deleteProduct($id){
-    //     $sql = "DELETE FROM products WHERE id=$id";
-    //     $result = $this->db->query($sql);
-    //     if ($result === true) {
-    //         echo "record deleted successfully";
-    //     }else {
-    //         echo "Error deleting record: " . $this->db->error;
-    //     }
-    // }
+    public function deleteCart($id){
+        $sql = "DELETE FROM cart WHERE user_id=$id";
+        $result = $this->db->query($sql);
+    }
 
     // public function updateProduct($id, $product_name, $product_brief_description, $product_description, $product_price, $product_image){
     //     $sql = "UPDATE products SET product_name=?, product_brief_description=?, product_description=?, product_price=?, product_image=? WHERE id=$id";
@@ -174,6 +176,39 @@ class crud{
     //     mysqli_stmt_bind_param($stmt, "sssss", $product_name, $product_brief_description, $product_description, $product_price, $product_image);
     //     mysqli_stmt_execute($stmt);
     // }
+
+    // add to order
+    public function addToOrder( $idproduct, $iduser,$address,$subtotal,$total,$name,$phone,$city){
+    $sql = "
+    INSERT INTO `order` (product_id,user_id,address,sub_total,total,recipient_name,Phone,city) 
+    VALUES (?,?,?,?,?,?,?,?)";
+
+    $stmt = mysqli_prepare($this->db, $sql);
+    mysqli_stmt_bind_param($stmt, "ssssssss",$idproduct, $iduser,$address,$subtotal,$total,$name,$phone,$city);
+    $result = mysqli_stmt_execute($stmt);
+    return $result;
+    }
+
+    //  // UPDATE QUANTITY OF PRODUCT
+    //  public function updateProductQuantity($userId,$productId,$quantity){
+    //     $sql = "UPDATE cart SET quantity_cart=? WHERE user_id=? AND product_id=?";
+    //     $stmt = mysqli_prepare($this->db, $sql);
+    //     mysqli_stmt_bind_param($stmt, "sss",$userId,$productId,$quantity);
+    //     mysqli_stmt_execute($stmt);
+    // }
+
+
+    public function updateProductQuantity($userId, $productId, $quantity) {
+        $sql = "UPDATE cart SET quantity_cart=? WHERE user_id=? AND product_id=?";
+        $stmt = mysqli_prepare($this->db, $sql);
+        
+        // "iss" corresponds to integer, string, string for user_id, product_id, quantity
+        mysqli_stmt_bind_param($stmt, "iss", $quantity, $userId, $productId);
+        
+        mysqli_stmt_execute($stmt);
+        
+        mysqli_stmt_close($stmt);
+    }
 
 }
 

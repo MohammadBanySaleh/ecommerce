@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2023 at 02:33 PM
+-- Generation Time: Aug 19, 2023 at 11:17 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -60,21 +60,31 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `product_id`, `user_id`, `quantity_cart`) VALUES
-(1, 11, 1, 4),
-(5, 11, 1, 3),
-(6, 11, 1, 3),
-(7, 11, 1, 3),
-(8, 11, 1, 1),
-(9, 11, 1, 1),
-(10, 11, 1, 3),
-(11, 11, 1, 3),
-(12, 11, 1, 1),
-(13, 11, 1, 1),
-(14, 11, 1, 1),
-(15, 11, 1, 1),
-(16, 11, 1, 8),
-(17, 11, 1, 8),
-(18, 11, 1, 8);
+(16, 11, 3, 8),
+(17, 11, 3, 8),
+(18, 11, 3, 8),
+(31, 11, 1, 1),
+(32, 11, 1, 1),
+(33, 11, 1, 1),
+(34, 11, 1, 1),
+(35, 11, 1, 1),
+(36, 12, 1, 1),
+(37, 12, 1, 3),
+(38, 12, 1, 3),
+(39, 12, 1, 3),
+(40, 12, 1, 1),
+(41, 12, 1, 5),
+(42, 12, 1, 7),
+(43, 12, 1, 6),
+(44, 12, 1, 8),
+(45, 12, 1, 8),
+(46, 12, 1, 4),
+(47, 12, 1, 4),
+(48, 12, 1, 4),
+(49, 12, 1, 4),
+(50, 12, 1, 4),
+(51, 12, 1, 3),
+(52, 12, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -126,15 +136,100 @@ CREATE TABLE `order` (
   `address` varchar(10) NOT NULL,
   `sub_total` float NOT NULL,
   `total` float NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `recipient_name` varchar(100) NOT NULL,
+  `Phone` int(20) NOT NULL,
+  `city` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`id`, `product_id`, `user_id`, `address`, `sub_total`, `total`, `date`) VALUES
-(1, 12, 1, '', 0, 0, '2023-08-17 19:58:55');
+INSERT INTO `order` (`id`, `product_id`, `user_id`, `address`, `sub_total`, `total`, `date`, `recipient_name`, `Phone`, `city`) VALUES
+(1, 12, 1, '', 0, 0, '2023-08-17 19:58:55', '', 0, ''),
+(2, 0, 0, '', 0, 0, '2023-08-18 21:06:48', 's', 0, ''),
+(3, 0, 0, '', 0, 0, '2023-08-18 21:06:52', 's', 0, ''),
+(4, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(5, 13, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(6, 12, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(7, 15, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(8, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(9, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(10, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(11, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(12, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(13, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(14, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(15, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(16, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(17, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(18, 11, 1, 'kk', 2000, 1000, '2023-08-18 21:21:14', 'Razan Mustafa', 799999999, 'Amman'),
+(19, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(20, 13, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(21, 12, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(22, 15, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(23, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(24, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(25, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(26, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(27, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(28, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(29, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(30, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(31, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(32, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(33, 11, 1, 'hgb', 2000, 1000, '2023-08-18 21:21:26', 'Razan Mustafa', 799999999, 'Amman'),
+(34, 11, 1, 'qqq', 2000, 1000, '2023-08-18 22:02:13', 'Razan Mustafa', 799999999, 'Amman'),
+(35, 13, 1, 'qqq', 2000, 1000, '2023-08-18 22:02:13', 'Razan Mustafa', 799999999, 'Amman'),
+(36, 12, 1, 'qqq', 2000, 1000, '2023-08-18 22:02:13', 'Razan Mustafa', 799999999, 'Amman'),
+(37, 15, 1, 'qqq', 2000, 1000, '2023-08-18 22:02:13', 'Razan Mustafa', 799999999, 'Amman'),
+(38, 11, 1, 'qqq', 2000, 1000, '2023-08-18 22:02:13', 'Razan Mustafa', 799999999, 'Amman'),
+(39, 11, 1, 'qqq', 2000, 1000, '2023-08-18 22:02:13', 'Razan Mustafa', 799999999, 'Amman'),
+(40, 11, 1, 'cccw', 2000, 1000, '2023-08-18 22:27:41', 'Razan Mustafa', 799999999, 'Amman'),
+(41, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:36:03', 'Razan Mustafa', 799999999, 'Irbid'),
+(42, 11, 1, 'ddd', 2000, 1000, '2023-08-19 08:38:19', 'Razan Mustafa nnnnnn', 799999999, 'Amman'),
+(43, 11, 1, 'aqapa', 2000, 1000, '2023-08-19 08:39:40', 'hassan', 799999999, 'Irbid'),
+(44, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:39:49', 'Razan Mustafaww', 799999999, 'Irbid'),
+(45, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:41:49', 'Razan Mustafaww', 799999999, 'Irbid'),
+(46, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:41:49', 'Razan Mustafaww', 799999999, 'Irbid'),
+(47, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:42:00', 'hassan', 799999999, 'Irbid'),
+(48, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:42:00', 'hassan', 799999999, 'Irbid'),
+(49, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:43:10', 'qqqqq', 799999999, 'Irbid'),
+(50, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:43:10', 'qqqqq', 799999999, 'Irbid'),
+(51, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:47:50', 'qqqqq', 799999999, 'Irbid'),
+(52, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:53:05', 'mohammad', 799999999, 'Irbid'),
+(53, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:53:05', 'mohammad', 799999999, 'Irbid'),
+(54, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:53:05', 'mohammad', 799999999, 'Irbid'),
+(55, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:53:16', 'a', 799999999, 'Irbid'),
+(56, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:53:16', 'a', 799999999, 'Irbid'),
+(57, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:53:16', 'a', 799999999, 'Irbid'),
+(58, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:56:47', 'a', 799999999, 'Irbid'),
+(59, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:56:47', 'a', 799999999, 'Irbid'),
+(60, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:56:47', 'a', 799999999, 'Irbid'),
+(61, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:57:16', 'a', 799999999, 'Irbid'),
+(62, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:57:16', 'a', 799999999, 'Irbid'),
+(63, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:57:16', 'a', 799999999, 'Irbid'),
+(64, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:57:26', 'hassan', 799999999, 'Irbid'),
+(65, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:57:26', 'hassan', 799999999, 'Irbid'),
+(66, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:57:26', 'hassan', 799999999, 'Irbid'),
+(67, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:57:57', 'qsssss', 799999999, 'Irbid'),
+(68, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:57:57', 'qsssss', 799999999, 'Irbid'),
+(69, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:57:57', 'qsssss', 799999999, 'Irbid'),
+(70, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:59:19', 'wqwqwqw', 799999999, 'Irbid'),
+(71, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:59:19', 'wqwqwqw', 799999999, 'Irbid'),
+(72, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:59:19', 'wqwqwqw', 799999999, 'Irbid'),
+(73, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:59:57', 'asasas', 799999999, 'Irbid'),
+(74, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:59:57', 'asasas', 799999999, 'Irbid'),
+(75, 11, 1, 'amman', 2000, 1000, '2023-08-19 08:59:57', 'asasas', 799999999, 'Irbid'),
+(76, 11, 1, 'amman', 2000, 1000, '2023-08-19 09:04:46', 'hassan alajlouni', 799999999, 'Irbid'),
+(77, 11, 1, 'amman', 2000, 1000, '2023-08-19 09:04:46', 'hassan alajlouni', 799999999, 'Irbid'),
+(78, 11, 1, 'amman', 2000, 1000, '2023-08-19 09:04:46', 'hassan alajlouni', 799999999, 'Irbid'),
+(79, 11, 1, 'amman', 2000, 1000, '2023-08-19 09:04:46', 'hassan alajlouni', 799999999, 'Irbid'),
+(80, 11, 1, 'amman', 2000, 1000, '2023-08-19 09:04:46', 'hassan alajlouni', 799999999, 'Irbid'),
+(81, 11, 1, 'amman', 2000, 1000, '2023-08-19 09:04:46', 'hassan alajlouni', 799999999, 'Irbid'),
+(82, 11, 1, 'amman', 2000, 1000, '2023-08-19 09:04:46', 'hassan alajlouni', 799999999, 'Irbid'),
+(83, 11, 1, 'amman', 2000, 1000, '2023-08-19 09:04:46', 'hassan alajlouni', 799999999, 'Irbid');
 
 -- --------------------------------------------------------
 
@@ -163,8 +258,8 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`id`, `product_name`, `product_price`, `product_brife`, `product_des`, `category_id`, `quantity_product`, `product_img1`, `product_img2`, `product_img3`, `product_img4`, `id_brand`) VALUES
 (11, 'brack1', 23, 'Lorem Ipsum is simply dummy', 'Lorem Ipsum is simply dummy', 1, 23, 'brack.PNG', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRKOnwVbGndhC6tJofBhtHoYWt2unY0S5x4FQbN_oWdHntMzWWGudov-B0875_lFrD6k&usqp=CAU', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 1),
-(12, 'brack2', 100, 'Lorem Ipsum is simply dummy', 'Lorem Ipsum is simply dummy', 1, 34, 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRKOnwVbGndhC6tJofBhtHoYWt2unY0S5x4FQbN_oWdHntMzWWGudov-B0875_lFrD6k&usqp=CAU', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 2),
-(13, 'brack3', 34, 'Lorem Ipsum is simply dummy', NULL, 1, 34, 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRKOnwVbGndhC6tJofBhtHoYWt2unY0S5x4FQbN_oWdHntMzWWGudov-B0875_lFrD6k&usqp=CAU', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 3),
+(12, 'brack2', 100, 'Lorem Ipsum is simply dummy', 'Lorem Ipsum is simply dummy', 1, 34, 'brack.PNG', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRKOnwVbGndhC6tJofBhtHoYWt2unY0S5x4FQbN_oWdHntMzWWGudov-B0875_lFrD6k&usqp=CAU', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 2),
+(13, 'brack3', 34, 'Lorem Ipsum is simply dummy', NULL, 1, 34, 'brack.PNG', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRKOnwVbGndhC6tJofBhtHoYWt2unY0S5x4FQbN_oWdHntMzWWGudov-B0875_lFrD6k&usqp=CAU', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 3),
 (14, 'intr1', 32, 'Lorem Ipsum is simply dummy', 'Lorem Ipsum is simply dummy', 1, 45, 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRKOnwVbGndhC6tJofBhtHoYWt2unY0S5x4FQbN_oWdHntMzWWGudov-B0875_lFrD6k&usqp=CAU', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 1),
 (15, 'inter2', 34, 'Lorem Ipsum is simply dummy', 'Lorem Ipsum is simply dummy', 1, 47, 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRKOnwVbGndhC6tJofBhtHoYWt2unY0S5x4FQbN_oWdHntMzWWGudov-B0875_lFrD6k&usqp=CAU', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 'https://m.media-amazon.com/images/I/6105DBGtKrL.jpg', 2),
 (17, 'inter3', 200, NULL, NULL, 1, 0, '', '', '', '', 3),
@@ -318,7 +413,7 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -336,7 +431,7 @@ ALTER TABLE `discount`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `product`

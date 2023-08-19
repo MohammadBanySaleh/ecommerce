@@ -3,6 +3,9 @@ session_start();
 $_SESSION['userID']=1;
 $_GET['productId'];
 
+$_SESSION['islogin']='no';
+
+
 require_once "./db/conn.php";
 //global $CataId = $GET['CataId'];
 
@@ -355,7 +358,19 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                                     <li class="minicart-wrap">
                                         <a href="#miniCart" class="minicart-btn toolbar-btn">
                                             <div class="minicart-count_area">
-                                                <span class="item-count">3</span>
+                                                <span class="item-count">
+                                                <?php 
+                                                    if (isset($_POST['addToCart']) && $_SESSION['islogin'] == 'yes'){
+                                                    $resul= $crudObj-> getProductInCart($_SESSION['userID']);
+                                                    echo mysqli_num_rows($resul);}
+                                                    else{
+                                                        $resul= $crudObj-> getProductInCart($_SESSION['userID']);
+                                                    echo mysqli_num_rows($resul);
+
+                                                    }
+                                                    
+                                                    ?>
+                                               </span>
                                                 <i class="ion-bag"></i>
                                             </div>
                                             <div class="minicart-front_text">
@@ -646,7 +661,17 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                                     <li class="minicart-wrap">
                                         <a href="#miniCart" class="minicart-btn toolbar-btn">
                                             <div class="minicart-count_area">
-                                                <span class="item-count">3</span>
+                                                <span class="item-count"> <?php 
+                                                    if (isset($_POST['addToCart'])){
+                                                    $resul= $crudObj-> getProductInCart($_SESSION['userID']);
+                                                    echo mysqli_num_rows($resul);}
+                                                    else{
+                                                        $resul= $crudObj-> getProductInCart($_SESSION['userID']);
+                                                    echo mysqli_num_rows($resul);
+
+                                                    }
+                                                    
+                                                    ?></span>
                                                 <i class="ion-bag"></i>
                                             </div>
                                             <div class="minicart-front_text">
@@ -1106,7 +1131,15 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
         <!-- Uren's Breadcrumb Area End Here -->
 
         <!-- Begin Uren's Tab Style Left Area -->
-        <?php while($product = $singleproducts->fetch_assoc()){ ?>
+        <?php while($product = $singleproducts->fetch_assoc()){ 
+        global $nameP;
+        global $breifP;
+        global $priceP;
+        $nameP=$product['product_name']; 
+        $breifP=$product['product_brife'];
+        $priceP=$product['product_price'];
+    
+        ?>
         <div class="sp-area sp-tab-style_left">
             <div class="container-fluid">
                 <div class="sp-nav">
@@ -1184,7 +1217,7 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                                                                                         $row = $resul->fetch_assoc();
                                                                                         $manufacName = $row['Brand_name'];
                                                                                         echo $manufacName;} ?></a></li>
-                                        <li>Product Code: <a href="javascript:void(0)">Product 16</a></li>
+                                        <li>Product Code: <a href="javascript:void(0)">Product<?php echo $product['id'] ?></a></li>
                                         <li>Product Quantity: <a href="javascript:void(0)"><?php echo $product['quantity_product'] ?></a></li>
                                         <li>Availability: <a href="javascript:void(0)"><?php  if($product['quantity_product']>0)
                                                                                                   {echo "Yes";}
@@ -1212,7 +1245,7 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                                 </div>
                                 <div class="qty-btn_area">
                                     <ul>
-                                        <li><a class="qty-cart_btn" href="single-product-tab-style-left.php"><button type="submit" name="addToCart">Add To Cart</button></a></li>
+                                        <li><button style="background-color:gold ;padding:5px; margin-top:10px; font-size:15px;" class="qty-cart_btn" type="submit" name="addToCart">Add To Cart</button></li>
                                         <li><a class="qty-wishlist_btn" href="wishlist.html" data-toggle="tooltip" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
 
                                         </li>
@@ -1223,11 +1256,43 @@ $singleproducts = $crudObj->getSingleProduct($_GET['productId']);
                                 <?php  if (isset($_POST['addToCart'])){
 
                                     $quantity= $_POST['quantity_value'];
-                                    // echo $quantity;
-                                    $crudObj->addToCart($_GET['productId'], $_SESSION['userID'], $quantity);
+                                    $quantityfun=$crudObj->getCart2($_SESSION['userID'],$_GET['productId']);
+                                    
+                                    if ($_SESSION['islogin'] == 'yes') {
+                                        if ($quantityfun->num_rows > 0) {
+                                            while($quantities = $quantityfun->fetch_assoc()) {
+                                            $quantityNew= $quantity+ $quantities['quantity_cart'];
+    
+                                            $crudObj->updateProductQuantity($_SESSION['userID'],$_GET['productId'],$quantityNew);
+                                            }
+                                        }
+                                        else{
+                                            $crudObj->addToCart($_GET['productId'],$_SESSION['userID'],$quantity);
+                                        }
+
+                                    }else if ($_SESSION['islogin'] == 'no') {
+                                        $newProduct = array(
+                                            'product_id' => $_GET['productId'],
+                                            'product_name' => $nameP,
+                                            'product_brife' => $breifP,
+                                            'product_price' => $priceP,
+                                        );
+                                        
+                                        $productarray1 = array();
+                                        array_push($productarray1, $newProduct);
+                                       
+
+                                        $productarray2 = $_SESSION['arrayOfProduct'];
+                                        array_push($productarray2, $productarray1);
+                                        $_SESSION['arrayOfProduct']=$productarray2;
+                                        // print_r($_SESSION['arrayOfProduct']);
+
+                                    }
 
                                 }?>
-                                <a  href="cart.php"><button style="background-color:gold ;padding:5px; margin-top:60px; font-size:15px;">Go To Cart</button></a></li>
+                                 <a href="shop-left-sidebar.php"><button style="background-color:gold ;padding:5px; margin-top:60px; font-size:15px;">Back to Products</button></a></li>
+
+                                <a href="cart.php"><button style="background-color:gold ;padding:5px; margin-top:60px; font-size:15px;">Go To Cart</button></a></li>
 
                             </div>
                         </div>
