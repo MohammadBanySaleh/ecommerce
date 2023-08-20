@@ -3,7 +3,7 @@ session_start();
 $_SESSION['userID']=1;
 $_GET['productId'];
 
-$_SESSION['islogin']='no';
+$_SESSION['islogin']='yes';
 
 
 require_once "./db/conn.php";

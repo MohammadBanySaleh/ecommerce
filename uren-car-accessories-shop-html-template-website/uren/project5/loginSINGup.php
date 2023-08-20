@@ -35,7 +35,7 @@ if ($conn->connect_error) {
 
 <body>
 
-     <h2>welcome </h2>
+    <h2>welcome </h2>
 
 
     <div class="container" id="container">
@@ -152,10 +152,10 @@ if ($conn->connect_error) {
                 </div>
                 <strong>or use your account</strong>
                 <br>
-                <input type="email" placeholder="Email" name="email" />
+                <input type="email" placeholder="Email" name="email" required />
                 <br>
 
-                <input type="password" placeholder="Password" name="passwords" />
+                <input type="password" placeholder="Password" name="passwords" required />
                 <br>
 
                 <a href="resetpassword.php">Forgot your password?</a>
